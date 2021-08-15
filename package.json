@@ -1,0 +1,19 @@
+{
+  "name": "exscientia-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "concurrently --kill-others \"npm run startDevServer\" \"npm run startDevClient\"",
+    "startDevServer": "cd ./server && npm run dev",
+    "startDevClient": "cd ./client && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nimesulide/exscientia-challenge.git"
+  },
+  "author": "Mate Csonka",
+  "homepage": "https://github.com/nimesulide/exscientia-challenge#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
