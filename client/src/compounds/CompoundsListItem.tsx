@@ -1,62 +1,32 @@
-import { ListItem, ListItemAvatar, Avatar, ListItemText, Divider, Typography, makeStyles } from "@material-ui/core";
+import { Avatar, makeStyles, TableCell, TableRow } from "@material-ui/core";
 import { Compound } from "./types";
 
 interface CompoundsListItemProps {
     compound: Compound;
-    handleListItemSelect?: (compound_id: number) => void;
+    handleRowSelect?: (compound_id: number) => void;
     selected?: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
-    avatar: {
-        height: '6rem',
-        width: '6rem',
-        marginRight: theme.spacing(1)
-    },
-    selected: {
-        backgroundColor: theme.palette.grey[300]
+    image: {
+        height: 100,
+        width: 100
     }
 }));
 
-export default ({ compound, handleListItemSelect, selected }: CompoundsListItemProps) => {
+export default ({ compound, handleRowSelect, selected }: CompoundsListItemProps) => {
     const classes = useStyles();
 
     return (
-        <>
-            <ListItem
-                button
-                key={compound.compound_id}
-                onClick={() => handleListItemSelect ? handleListItemSelect(compound.compound_id) : null}
-                className={selected ? classes.selected : undefined}
-            >
-                <ListItemAvatar>
-                    <Avatar
-                        className={classes.avatar}
-                        variant={'square'}
-                        src={`https://exscientia-challenge.s3.eu-central-1.amazonaws.com/${compound.image}`}
-                    />
-                </ListItemAvatar>
-                <ListItemText
-                    primary={compound.molecular_formula}
-                    secondary={
-                        <>
-                            <Typography>
-                                SMILES: {compound.smiles}
-                            </Typography>
-                            <Typography>
-                                Molecular Weight: {compound.molecular_weight}
-                            </Typography>
-                            <Typography>
-                                ALogP: {compound.ALogP}
-                            </Typography>
-                            <Typography>
-                                Number of Rings: {compound.num_rings}
-                            </Typography>
-                        </>
-                    }
-                />
-            </ListItem>
-            <Divider />
-        </>
+        <TableRow selected={selected} onClick={() => handleRowSelect ? handleRowSelect(compound.compound_id) : null}>
+            <TableCell>
+                <Avatar className={classes.image} variant={'square'} src={`https://exscientia-challenge.s3.eu-central-1.amazonaws.com/${compound.image}`} />
+            </TableCell>
+            <TableCell>{compound.molecular_formula}</TableCell>
+            <TableCell>{compound.smiles}</TableCell>
+            <TableCell>{compound.molecular_weight}</TableCell>
+            <TableCell>{compound.ALogP}</TableCell>
+            <TableCell>{compound.num_rings}</TableCell>
+        </TableRow>
     );
 };
