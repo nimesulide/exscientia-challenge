@@ -7,6 +7,7 @@ const getAllCompoundsBasicData = () => Compounds.aggregate([
             compound_id: '$compound_id',
             smiles: '$smiles',
             molecular_weight: '$molecular_weight',
+            ALogP: '$ALogP',
             molecular_formula: '$molecular_formula',
             num_rings: '$num_rings',
             image: '$image'
