@@ -9,6 +9,7 @@ interface ICompoundsStore {
     assayResults: AssayResult[];
     loadCompounds: () => void;
     selectCompound: (compound_id: number) => void;
+    loadAssayResults: (compound_id: number) => void;
 }
 
 const CompoundsStore = store<ICompoundsStore>({
@@ -21,7 +22,17 @@ const CompoundsStore = store<ICompoundsStore>({
             .catch(error => console.error(error));
     },
     selectCompound(compound_id: number) {
-        CompoundsStore.selectedCompoundId = compound_id;
+        if (compound_id === CompoundsStore.selectedCompoundId) {
+            CompoundsStore.selectedCompoundId = null;
+        } else {
+            CompoundsStore.selectedCompoundId = compound_id;
+        }
+        CompoundsStore.loadAssayResults(compound_id);
+    },
+    loadAssayResults(compound_id: number) {
+        get(generatePath(Routes.GET_COMPOUND_DETAILS, {compound_id}))
+            .then(results => CompoundsStore.assayResults = results.assay_results)
+            .catch(error => console.error(error));
     }
 });
 

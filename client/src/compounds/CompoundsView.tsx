@@ -3,6 +3,7 @@ import { Grid, Paper } from '@material-ui/core';
 import { view } from '@risingstack/react-easy-state';
 import CompoundsList from './CompoundsList';
 import CompoundsStore from './CompoundsStore';
+import CompoundDetails from './CompoundDetails';
 
 export default view(() => {
 
@@ -20,13 +21,11 @@ export default view(() => {
                     </Paper>
                 }
             </Grid>
-            <Grid item xs={12}>
-                {
+            <Grid item xs>
+                {/* {
                     Boolean(CompoundsStore.selectedCompoundId) &&
-                    <Paper>
-                        
-                    </Paper>
-                }
+                    <CompoundDetails />
+                } */}
             </Grid>
         </Grid>
     );
