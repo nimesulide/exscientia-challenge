@@ -30,10 +30,10 @@ export interface Compound {
     /**
      * The assay results for the compound (could be shown as Kd = 19uM) https://en.wikipedia.org/wiki/Assay.
      */
-    assay_results?: AssayResults[];
+    assay_results?: AssayResult[];
 }
 
-export interface AssayResults {
+export interface AssayResult {
     /**
      * Unique identifier for an assay_result.
      */

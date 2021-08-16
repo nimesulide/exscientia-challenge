@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@material-ui/core": "latest",
+    "@risingstack/react-easy-state": "^6.3.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "path-to-regexp": "^6.2.0",

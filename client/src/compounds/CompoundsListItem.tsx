@@ -3,6 +3,8 @@ import { Compound } from "./types";
 
 interface CompoundsListItemProps {
     compound: Compound;
+    handleListItemSelect?: (compound_id: number) => void;
+    selected?: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -10,15 +12,23 @@ const useStyles = makeStyles((theme) => ({
         height: '6rem',
         width: '6rem',
         marginRight: theme.spacing(1)
+    },
+    selected: {
+        backgroundColor: theme.palette.grey[300]
     }
 }));
 
-export default ({ compound }: CompoundsListItemProps) => {
+export default ({ compound, handleListItemSelect, selected }: CompoundsListItemProps) => {
     const classes = useStyles();
 
     return (
         <>
-            <ListItem button key={compound.compound_id}>
+            <ListItem
+                button
+                key={compound.compound_id}
+                onClick={() => handleListItemSelect ? handleListItemSelect(compound.compound_id) : null}
+                className={selected ? classes.selected : undefined}
+            >
                 <ListItemAvatar>
                     <Avatar
                         className={classes.avatar}

@@ -1,18 +1,24 @@
 import React from 'react';
-import { Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
+import { List } from '@material-ui/core';
 import { Compound } from './types';
 import CompoundsListItem from './CompoundsListItem';
+import { view } from '@risingstack/react-easy-state';
+import CompoundsStore from './CompoundsStore';
 
 interface CompoundListProps {
     compounds: Compound[];
 }
 
-export default ({ compounds }: CompoundListProps) => (
+export default view(({ compounds }: CompoundListProps) => (
     <List>
         {
             compounds.map(compound => (
-                <CompoundsListItem compound={compound} />
+                <CompoundsListItem
+                    compound={compound}
+                    handleListItemSelect={(compound_id) => CompoundsStore.selectCompound(compound_id)}
+                    selected={compound.compound_id === CompoundsStore.selectedCompoundId}
+                />
             ))
         }
     </List>
-);
+));
