@@ -13,12 +13,10 @@ export default view(() => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={CompoundsStore.selectedCompoundId ? 6 : 12}>
                 {
                     Boolean(CompoundsStore.compounds.length) &&
-                    <Paper>
-                        <CompoundsList compounds={CompoundsStore.compounds} />
-                    </Paper>
+                    <CompoundsList compounds={CompoundsStore.compounds} />
                 }
             </Grid>
             <Grid item xs>
