@@ -1,6 +1,6 @@
 import React from 'react';
 import { view } from '@risingstack/react-easy-state';
-import { Avatar, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { Compound } from './types';
 import CompoundsListItem from './CompoundsListItem';
 import CompoundsStore from './CompoundsStore';
@@ -11,7 +11,7 @@ interface CompoundListProps {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: `calc(90vh - ${theme.spacing(8)}px)`
+        height: `calc(90vh - ${theme.spacing(10)}px)`
     },
     tableContainer: {
         height: '100%',

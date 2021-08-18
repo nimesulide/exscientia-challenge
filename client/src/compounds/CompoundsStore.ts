@@ -1,7 +1,8 @@
 import { store } from "@risingstack/react-easy-state";
+import { ScatterplotConfig } from "../charts/Scatterplot";
 import { get } from "../utils/FetchWrappers";
 import { generatePath, Routes } from "../utils/Routes";
-import { AssayResult, Compound } from "./types";
+import { Compound } from "./types";
 
 interface ICompoundsStore {
     compounds: Compound[];
@@ -10,6 +11,8 @@ interface ICompoundsStore {
     loadCompounds: () => void;
     selectCompound: (compound_id: number) => void;
     loadAssayResults: (compound_id: number) => void;
+    chartConfig: ScatterplotConfig | undefined;
+    setChartConfig: (config: ScatterplotConfig | undefined) => void;
 }
 
 const CompoundsStore = store<ICompoundsStore>({
@@ -31,9 +34,13 @@ const CompoundsStore = store<ICompoundsStore>({
         CompoundsStore.loadAssayResults(compound_id);
     },
     loadAssayResults(compound_id: number) {
-        get(generatePath(Routes.GET_COMPOUND_DETAILS, {compound_id}))
+        get(generatePath(Routes.GET_COMPOUND_DETAILS, { compound_id }))
             .then(results => CompoundsStore.selectedCompoundDetails = results)
             .catch(error => console.error(error));
+    },
+    chartConfig: undefined,
+    setChartConfig(config) {
+        CompoundsStore.chartConfig = config;
     }
 });
 

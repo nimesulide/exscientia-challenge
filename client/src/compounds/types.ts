@@ -59,3 +59,9 @@ export interface AssayResult {
      */
     unit?: string;
 }
+
+export enum Plottables {
+    MOLECULAR_WEIGHT = 'molecular_weight',
+    ALOGP = 'ALogP',
+    NUM_RINGS = 'num_rings'
+}

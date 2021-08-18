@@ -7,7 +7,6 @@ interface AssayResultTableProps {
 }
 
 export default ({ assay_results }: AssayResultTableProps) => {
-    console.log(assay_results)
     return (
         <TableContainer>
             <Table size={'small'}>
