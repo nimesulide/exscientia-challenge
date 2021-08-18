@@ -10,24 +10,30 @@ interface CompoundListProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-
+    root: {
+        height: `calc(90vh - ${theme.spacing(8)}px)`
+    },
+    tableContainer: {
+        height: '100%',
+        overflow: 'auto'
+    }
 }));
 
 export default view(({ compounds }: CompoundListProps) => {
     const classes = useStyles();
 
     return (
-        <Paper>
-            <TableContainer>
+        <Paper className={classes.root}>
+            <TableContainer className={classes.tableContainer}>
                 <Table size={'small'}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Molecule</TableCell>
                             <TableCell>Molecular Formula</TableCell>
-                            <TableCell>SMILES</TableCell>
                             <TableCell>Molecular Weight</TableCell>
                             <TableCell>ALogP</TableCell>
                             <TableCell>Number of Rings</TableCell>
+                            <TableCell>SMILES</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

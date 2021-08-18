@@ -19,11 +19,11 @@ export default view(() => {
                     <CompoundsList compounds={CompoundsStore.compounds} />
                 }
             </Grid>
-            <Grid item xs>
-                {/* {
-                    Boolean(CompoundsStore.selectedCompoundId) &&
-                    <CompoundDetails />
-                } */}
+            <Grid item xs={CompoundsStore.selectedCompoundId ? 6 : true}>
+                {
+                    Boolean(CompoundsStore.selectedCompoundId && CompoundsStore.selectedCompoundDetails) &&
+                    <CompoundDetails compoundDetails={CompoundsStore.selectedCompoundDetails} />
+                }
             </Grid>
         </Grid>
     );

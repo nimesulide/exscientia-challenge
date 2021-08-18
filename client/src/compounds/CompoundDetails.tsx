@@ -1,20 +1,24 @@
-import { makeStyles, Card, CardHeader } from "@material-ui/core";
-import { AssayResult, Compound } from "./types";
+import { makeStyles, Card, CardHeader, CardContent } from "@material-ui/core";
+import AssayResultTable from "./AssayResultTable";
+import { Compound } from "./types";
 
 interface CompoundDetailsProps {
-    assayResults?: AssayResult[];
+    compoundDetails?: Compound;
 }
 
 const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default ({ assayResults }: CompoundDetailsProps) => {
+export default ({ compoundDetails }: CompoundDetailsProps) => {
     const classes = useStyles();
 
     return (
         <Card>
-            <CardHeader title={'Assay Results'} />
+            <CardHeader title={'Compound Details'} />
+            <CardContent>
+                <AssayResultTable assay_results={compoundDetails?.assay_results ?? []} />
+            </CardContent>
         </Card>
     );
 };

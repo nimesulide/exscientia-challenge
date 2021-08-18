@@ -23,10 +23,10 @@ export default ({ compound, handleRowSelect, selected }: CompoundsListItemProps)
                 <Avatar className={classes.image} variant={'square'} src={`https://exscientia-challenge.s3.eu-central-1.amazonaws.com/${compound.image}`} />
             </TableCell>
             <TableCell>{compound.molecular_formula}</TableCell>
-            <TableCell>{compound.smiles}</TableCell>
             <TableCell>{compound.molecular_weight}</TableCell>
             <TableCell>{compound.ALogP}</TableCell>
             <TableCell>{compound.num_rings}</TableCell>
+            <TableCell>{compound.smiles}</TableCell>
         </TableRow>
     );
 };

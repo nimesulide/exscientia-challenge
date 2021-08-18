@@ -5,8 +5,8 @@ import { AssayResult, Compound } from "./types";
 
 interface ICompoundsStore {
     compounds: Compound[];
-    selectedCompoundId: null | number;
-    assayResults: AssayResult[];
+    selectedCompoundId?: number;
+    selectedCompoundDetails?: Compound;
     loadCompounds: () => void;
     selectCompound: (compound_id: number) => void;
     loadAssayResults: (compound_id: number) => void;
@@ -14,8 +14,8 @@ interface ICompoundsStore {
 
 const CompoundsStore = store<ICompoundsStore>({
     compounds: [],
-    selectedCompoundId: null,
-    assayResults: [],
+    selectedCompoundId: undefined,
+    selectedCompoundDetails: undefined,
     loadCompounds() {
         get(generatePath(Routes.GET_COMPOUND_LIST))
             .then(compounds => CompoundsStore.compounds = compounds)
@@ -23,7 +23,8 @@ const CompoundsStore = store<ICompoundsStore>({
     },
     selectCompound(compound_id: number) {
         if (compound_id === CompoundsStore.selectedCompoundId) {
-            CompoundsStore.selectedCompoundId = null;
+            CompoundsStore.selectedCompoundId = undefined;
+            CompoundsStore.selectedCompoundDetails = undefined;
         } else {
             CompoundsStore.selectedCompoundId = compound_id;
         }
@@ -31,7 +32,7 @@ const CompoundsStore = store<ICompoundsStore>({
     },
     loadAssayResults(compound_id: number) {
         get(generatePath(Routes.GET_COMPOUND_DETAILS, {compound_id}))
-            .then(results => CompoundsStore.assayResults = results.assay_results)
+            .then(results => CompoundsStore.selectedCompoundDetails = results)
             .catch(error => console.error(error));
     }
 });
