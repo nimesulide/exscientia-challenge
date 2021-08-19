@@ -1,6 +1,6 @@
 import React from 'react';
 import { interpolateTurbo, scaleOrdinal, scaleSequential, schemeCategory10 } from 'd3';
-import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter, Cell } from 'recharts';
+import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter, Cell, Legend, Line } from 'recharts';
 
 export interface ScatterplotConfig {
     x: string,
@@ -15,12 +15,20 @@ interface ScatterplotProps {
 
 const getDistinctValues = (values: Array<number>) => [...new Set(values)];
 
+const getColorScale = (data: Array<any>, config: ScatterplotConfig) => {
+    const distinctValues = getDistinctValues(data.map(entry => entry[config.color ?? '']));
+    const isCategorical = distinctValues.length <= 10;
+
+    if (isCategorical) return scaleOrdinal(schemeCategory10);
+
+    distinctValues.sort((a, b) => a - b);
+    const domain = [distinctValues[0], distinctValues[distinctValues.length - 1]];
+
+    return scaleSequential(interpolateTurbo).domain(domain);
+};
+
 export default ({ data, config }: ScatterplotProps) => {
-    const isCategorical = config.color &&
-        (getDistinctValues(data.map(entry => entry[config.color ?? ''])).length <= 10);
-    const colors = isCategorical ?
-        scaleOrdinal(schemeCategory10) :
-        scaleSequential(interpolateTurbo);
+    const colors = getColorScale(data, config);
     return (
         <ResponsiveContainer width='100%' height='100%'>
             <ScatterChart
