@@ -12,7 +12,7 @@ interface ICompoundsStore {
     selectCompound: (compound_id: number) => void;
     loadAssayResults: (compound_id: number) => void;
     chartConfig: ScatterplotConfig | undefined;
-    setChartConfig: (config: ScatterplotConfig | undefined) => void;
+    setChartConfig: (config?: ScatterplotConfig) => void;
     targetTypes: string[];
     loadTargetTypes: () => void;
     addCalculatedFields: (config: CalculatedFieldConfig) => void;

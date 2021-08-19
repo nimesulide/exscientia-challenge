@@ -25,9 +25,9 @@ export default ({ data, config }: ScatterplotProps) => {
         <ResponsiveContainer width='100%' height='100%'>
             <ScatterChart
                 margin={{
-                    top: 20,
+                    top: 10,
                     right: 30,
-                    bottom: 20,
+                    bottom: 30,
                     left: 10,
                 }}
             >
