@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from "express";
 import { createResponse } from "../utils";
-import { getAllCompoundsBasicData, getAllTargets, getDataForCompoundId } from "./compoundDAO";
+import { calculateFields, getAllCompoundsBasicData, getAllTargets, getDataForCompoundId } from "./compoundDAO";
 
 const getCompoundsAction = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -30,4 +30,17 @@ const getAllTargetsAction = async (req: Request, res: Response, next: NextFuncti
     };
 };
 
-export { getCompoundsAction, getDataForCompoundIdAction, getAllTargetsAction };
+const getCalculatedFieldsAction = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const config = req.body;
+        if (!config?.method) {
+            return next(new Error('Method must be given to calculate new field.'));
+        }
+        const calculatedFields = await calculateFields(config);
+        createResponse(res)(calculatedFields);
+    } catch (error) {
+        next(error);
+    };
+};
+
+export { getCompoundsAction, getDataForCompoundIdAction, getAllTargetsAction, getCalculatedFieldsAction };

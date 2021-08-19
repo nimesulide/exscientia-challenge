@@ -36,4 +36,38 @@ const getAllTargets = async () => {
     return aggregationResult[0].targets;
 };
 
-export { getAllCompoundsBasicData, getDataForCompoundId, getAllTargets };
+const calculateFields = (config: {
+    target?: string,
+    result?: string,
+    operator?: string,
+    unit?: string,
+    method: 'avg' | 'min' | 'max'
+}) => Compounds.aggregate([
+    {
+        '$addFields': {
+            'assay_results_filtered': {
+                '$filter': {
+                    'input': '$assay_results',
+                    'as': 'result',
+                    'cond': {
+                        '$and': [
+                            config.target ? { '$eq': ['$$result.target', config.target] } : true,
+                            config.result ? { '$eq': ['$$result.result', config.result] } : true,
+                            config.operator ? { '$eq': ['$$result.operator', config.operator] } : true,
+                            config.unit ? { '$eq': ['$$result.unit', config.unit] } : true,
+                        ]
+                    }
+                }
+            }
+        }
+    }, {
+        '$project': {
+            'compound_id': '$compound_id',
+            'value': {
+                [`$${config.method}`]: '$assay_results_filtered.value'
+            }
+        }
+    }
+]);
+
+export { getAllCompoundsBasicData, getDataForCompoundId, getAllTargets, calculateFields };
