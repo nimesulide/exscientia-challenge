@@ -33,7 +33,6 @@ const getAllTargets = async () => {
             }
         }
     ]);
-
     return aggregationResult[0].targets;
 };
 

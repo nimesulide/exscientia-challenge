@@ -1,12 +1,15 @@
 import express from "express";
-import { getCompoundsAction, getDataForCompoundIdAction } from "./compoundController";
+import { getAllTargetsAction, getCompoundsAction, getDataForCompoundIdAction } from "./compoundController";
 
 const compoundRouter = express.Router();
 
 compoundRouter.route('/')
     .get(getCompoundsAction);
 
-compoundRouter.route('/:compound_id')
+compoundRouter.route('/details/:compound_id')
     .get(getDataForCompoundIdAction);
+
+compoundRouter.route('/targets')
+    .get(getAllTargetsAction);
 
 export default compoundRouter;

@@ -1,6 +1,6 @@
 import { Response, Request, NextFunction } from "express";
 import { createResponse } from "../utils";
-import { getAllCompoundsBasicData, getDataForCompoundId } from "./compoundDAO";
+import { getAllCompoundsBasicData, getAllTargets, getDataForCompoundId } from "./compoundDAO";
 
 const getCompoundsAction = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -21,4 +21,13 @@ const getDataForCompoundIdAction = async (req: Request, res: Response, next: Nex
     };
 };
 
-export { getCompoundsAction, getDataForCompoundIdAction };
+const getAllTargetsAction = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const targets = await getAllTargets();
+        createResponse(res)(targets);
+    } catch (error) {
+        next(error);
+    };
+};
+
+export { getCompoundsAction, getDataForCompoundIdAction, getAllTargetsAction };
