@@ -1,8 +1,8 @@
 import { store } from "@risingstack/react-easy-state";
 import { ScatterplotConfig } from "../charts/Scatterplot";
-import { get } from "../utils/FetchWrappers";
+import { get, post } from "../utils/FetchWrappers";
 import { generatePath, Routes } from "../utils/Routes";
-import { Compound } from "./types";
+import { CalculatedFieldConfig, Compound } from "./types";
 
 interface ICompoundsStore {
     compounds: Compound[];
@@ -15,6 +15,8 @@ interface ICompoundsStore {
     setChartConfig: (config: ScatterplotConfig | undefined) => void;
     targetTypes: string[];
     loadTargetTypes: () => void;
+    addCalculatedFields: (config: CalculatedFieldConfig) => void;
+    calculationConfigs: CalculatedFieldConfig[];
 }
 
 const CompoundsStore = store<ICompoundsStore>({
@@ -49,7 +51,28 @@ const CompoundsStore = store<ICompoundsStore>({
         get(generatePath(Routes.GET_TARGET_TYPES))
             .then(targets => CompoundsStore.targetTypes = targets)
             .catch(error => console.error(error));
-    }
+    },
+    addCalculatedFields(config) {
+        post(generatePath(Routes.GET_CALCULATED_FIELDS), config)
+            .then(fields => {
+                CompoundsStore.compounds = pairCompoundsWithFields(CompoundsStore.compounds, fields, config);
+                CompoundsStore.calculationConfigs = CompoundsStore.calculationConfigs.concat([config]);
+            })
+            .catch(error => console.error(error));
+    },
+    calculationConfigs: []
 });
+
+const pairCompoundsWithFields = (
+    compounds: Compound[],
+    fields: Array<{ compound_id: number, value: number }>,
+    config: CalculatedFieldConfig
+): Compound[] => {
+    return compounds.map(compound => {
+        const newlyCalculatedField = fields.find(field => field.compound_id === compound.compound_id);
+        const calculatedFields = Array.from(compound.calculatedFields ?? []).concat([newlyCalculatedField?.value]);
+        return Object.assign({}, compound, { calculatedFields })
+    })
+};
 
 export default CompoundsStore;

@@ -33,6 +33,15 @@ export default view(({ compounds }: CompoundListProps) => {
                             <TableCell>Molecular Weight</TableCell>
                             <TableCell>ALogP</TableCell>
                             <TableCell>Number of Rings</TableCell>
+                            {CompoundsStore.calculationConfigs.map(config => (
+                                <TableCell>
+                                    {`${config.method} for 
+                                    ${config.target ? config.target + ' | ': ''}
+                                    ${config.operator ? config.operator + ' | ': ''}
+                                    ${config.value ? config.value + ' | ': ''}
+                                    ${config.unit}`}
+                                </TableCell>
+                            ))}
                             <TableCell>SMILES</TableCell>
                         </TableRow>
                     </TableHead>

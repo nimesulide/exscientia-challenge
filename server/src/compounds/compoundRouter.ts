@@ -13,6 +13,6 @@ compoundRouter.route('/targets')
     .get(getAllTargetsAction);
 
 compoundRouter.route('/calculate-fields')
-    .get(getCalculatedFieldsAction);
+    .post(getCalculatedFieldsAction);
 
 export default compoundRouter;

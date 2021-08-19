@@ -26,7 +26,13 @@ export default ({ compound, handleRowSelect, selected }: CompoundsListItemProps)
             <TableCell>{compound.molecular_weight}</TableCell>
             <TableCell>{compound.ALogP}</TableCell>
             <TableCell>{compound.num_rings}</TableCell>
+            {
+                compound.calculatedFields?.map(field => (
+                    <TableCell>{field}</TableCell> 
+                ))
+            }
             <TableCell>{compound.smiles}</TableCell>
+            
         </TableRow>
     );
 };

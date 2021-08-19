@@ -34,7 +34,7 @@ const getAllTargets = async () => {
         }
     ]);
     return aggregationResult[0].targets;
-};
+}; 
 
 const calculateFields = (config: {
     target?: string,

@@ -27,8 +27,7 @@ const put = async (url: RequestInfo, data: any) => {
 
 const patch = async (url: RequestInfo, data: any) => {
     try {
-        const response = await fetch(url, createRequest('PATCH', data));
-        return await convertResponseToJson(response);
+        return await fetch(url, createRequest('PATCH', data)).then(convertResponseToJson);
     } catch (error) {
         console.log(error);
     }
@@ -36,8 +35,7 @@ const patch = async (url: RequestInfo, data: any) => {
 
 const remove = async (url: RequestInfo, data: any) => {
     try {
-        const response = await fetch(url, createRequest('DELETE', data));
-        return await convertResponseToJson(response);
+        return await fetch(url, createRequest('DELETE', data)).then(convertResponseToJson);
     } catch (error) {
         console.log(error);
     }

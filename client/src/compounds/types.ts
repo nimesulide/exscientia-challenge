@@ -34,7 +34,7 @@ export interface Compound {
     /**
      * Calculated field, e.g. aggregated assay result.
      */
-    calculatedFields?: CalculatedField[];
+    calculatedFields?: Array<number | undefined>;
 }
 
 export interface AssayResult {
@@ -80,17 +80,12 @@ export const AssayOperatorTypes = Object.freeze({
     '*': '*'
 });
 
-export interface CalculatedField {
-    value: number;
-    config: CalculatedFieldConfig;
-}
-
 export interface CalculatedFieldConfig extends AssayResult {
     method: AggregationMethods;
 }
 
 export enum AggregationMethods {
-    AVERAGE = 'average',
+    AVERAGE = 'avg',
     MIN = 'min',
     MAX = 'max'
 }
