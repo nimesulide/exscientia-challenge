@@ -6,8 +6,8 @@ import CalculatedFieldsAction from './CalculatedFieldsAction';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        color: theme.palette.getContrastText(teal[400]),
-        backgroundColor: teal[400]
+        backgroundColor: theme.palette.primary.light,
+        boxShadow: 'none'
     }
 }));
 

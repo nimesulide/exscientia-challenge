@@ -4,6 +4,7 @@ import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import { Compound } from './types';
 import CompoundsListItem from './CompoundsListItem';
 import CompoundsStore from './CompoundsStore';
+import CompoundsActionBar from './action-components/CompoundsActionBar';
 
 interface CompoundListProps {
     compounds: Compound[];
@@ -11,10 +12,11 @@ interface CompoundListProps {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: `calc(90vh - ${theme.spacing(10)}px)`
+        height: `calc(90vh - ${theme.spacing(10)}px)`,
+        display: 'flex',
+        flexDirection: 'column'
     },
     tableContainer: {
-        height: '100%',
         overflow: 'auto'
     }
 }));
@@ -24,8 +26,9 @@ export default view(({ compounds }: CompoundListProps) => {
 
     return (
         <Paper className={classes.root}>
+            <CompoundsActionBar />
             <TableContainer className={classes.tableContainer}>
-                <Table size={'small'}>
+                <Table stickyHeader size={'small'}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Molecule</TableCell>

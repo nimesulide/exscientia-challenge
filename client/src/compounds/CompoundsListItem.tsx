@@ -11,6 +11,11 @@ const useStyles = makeStyles((theme) => ({
     image: {
         height: 100,
         width: 100
+    },
+    row: {
+        '&:hover': {
+            backgroundColor: theme.palette.action.hover
+        }
     }
 }));
 
@@ -18,7 +23,7 @@ export default ({ compound, handleRowSelect, selected }: CompoundsListItemProps)
     const classes = useStyles();
 
     return (
-        <TableRow selected={selected} onClick={() => handleRowSelect ? handleRowSelect(compound.compound_id) : null}>
+        <TableRow className={classes.row} selected={selected} onClick={() => handleRowSelect ? handleRowSelect(compound.compound_id) : null}>
             <TableCell>
                 <Avatar className={classes.image} variant={'square'} src={`https://exscientia-challenge.s3.eu-central-1.amazonaws.com/${compound.image}`} />
             </TableCell>

@@ -20,9 +20,6 @@ export default view(() => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <CompoundsActionBar />
-            </Grid>
             <Grid item xs={CompoundsStore.selectedCompoundId || CompoundsStore.chartConfig ? 6 : 12}>
                 {
                     Boolean(CompoundsStore.compounds.length) &&
