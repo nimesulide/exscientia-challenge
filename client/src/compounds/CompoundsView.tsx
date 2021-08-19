@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { view } from '@risingstack/react-easy-state';
 import CompoundsList from './CompoundsList';
-import CompoundsStore from './CompoundsStore';
+import CompoundsStore from './store/CompoundsStore';
 import CompoundDetails from './CompoundDetails';
 import CompoundsActionBar from './action-components/CompoundsActionBar';
 import Scatterplot from '../charts/Scatterplot';

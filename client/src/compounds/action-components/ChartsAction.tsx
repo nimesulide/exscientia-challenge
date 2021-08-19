@@ -1,7 +1,7 @@
 import React from 'react';
 import BubbleChartIcon from '@material-ui/icons/BubbleChart';
 import { Plottables } from '../types';
-import CompoundsStore from '../CompoundsStore';
+import CompoundsStore from '../store/CompoundsStore';
 import { ScatterplotConfig } from '../../charts/Scatterplot';
 import ActionButtonWithDialog from './ActionButtonWithDialog';
 

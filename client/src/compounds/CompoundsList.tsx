@@ -3,7 +3,7 @@ import { view } from '@risingstack/react-easy-state';
 import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { Compound } from './types';
 import CompoundsListItem from './CompoundsListItem';
-import CompoundsStore from './CompoundsStore';
+import CompoundsStore from './store/CompoundsStore';
 import CompoundsActionBar from './action-components/CompoundsActionBar';
 
 interface CompoundListProps {

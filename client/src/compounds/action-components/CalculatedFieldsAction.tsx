@@ -2,7 +2,7 @@ import React from 'react';
 import FunctionsIcon from '@material-ui/icons/Functions';
 import { view } from '@risingstack/react-easy-state';
 import { AggregationMethods, AssayOperatorTypes, AssayResultTypes, CalculatedFieldConfig } from '../types';
-import CompoundsStore from '../CompoundsStore';
+import CompoundsStore from '../store/CompoundsStore';
 import ActionButtonWithDialog from './ActionButtonWithDialog';
 
 export default view(() => (

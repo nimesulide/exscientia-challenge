@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, makeStyles, Paper } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import CompoundsStore from './CompoundsStore';
+import CompoundsStore from './store/CompoundsStore';
 
 const useStyles = makeStyles((theme) => ({
     root: {
