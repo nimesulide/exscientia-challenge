@@ -13,6 +13,8 @@ interface ICompoundsStore {
     loadAssayResults: (compound_id: number) => void;
     chartConfig: ScatterplotConfig | undefined;
     setChartConfig: (config: ScatterplotConfig | undefined) => void;
+    targetTypes: string[];
+    loadTargetTypes: () => void;
 }
 
 const CompoundsStore = store<ICompoundsStore>({
@@ -41,6 +43,12 @@ const CompoundsStore = store<ICompoundsStore>({
     chartConfig: undefined,
     setChartConfig(config) {
         CompoundsStore.chartConfig = config;
+    },
+    targetTypes: [],
+    loadTargetTypes() {
+        get(generatePath(Routes.GET_TARGET_TYPES))
+            .then(targets => CompoundsStore.targetTypes = targets)
+            .catch(error => console.error(error));
     }
 });
 

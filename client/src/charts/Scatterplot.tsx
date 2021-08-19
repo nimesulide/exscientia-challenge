@@ -16,7 +16,6 @@ interface ScatterplotProps {
 const getDistinctValues = (values: Array<number>) => [...new Set(values)];
 
 export default ({ data, config }: ScatterplotProps) => {
-    console.log(data, config);
     const isCategorical = config.color &&
         (getDistinctValues(data.map(entry => entry[config.color ?? ''])).length <= 10);
     const colors = isCategorical ?

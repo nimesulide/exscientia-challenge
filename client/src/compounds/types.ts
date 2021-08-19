@@ -31,6 +31,10 @@ export interface Compound {
      * The assay results for the compound (could be shown as Kd = 19uM) https://en.wikipedia.org/wiki/Assay.
      */
     assay_results?: AssayResult[];
+    /**
+     * Calculated field, e.g. aggregated assay result.
+     */
+    calculatedFields?: CalculatedField[];
 }
 
 export interface AssayResult {
@@ -45,11 +49,11 @@ export interface AssayResult {
     /**
      * The result type of the assay.
      */
-    result?: "IC50" | "Ki" | "Kd";
+    result?: keyof typeof AssayResultTypes;
     /**
      * The value operator.
      */
-    operator?: "=" | ">" | "<" | "<=" | ">=" | "~" | "*";
+    operator?: keyof typeof AssayOperatorTypes;
     /**
      * The result value.
      */
@@ -58,6 +62,37 @@ export interface AssayResult {
      * The result unit.
      */
     unit?: string;
+}
+
+export const AssayResultTypes = Object.freeze({
+    IC50: 'IC50',
+    Ki: 'Ki',
+    Kd: 'Kd'
+});
+
+export const AssayOperatorTypes = Object.freeze({
+    '=': '=',
+    '>': '>',
+    '<': '<',
+    '<=': '<=',
+    '>=': '>=',
+    '~': '~',
+    '*': '*'
+});
+
+export interface CalculatedField {
+    value: number;
+    config: CalculatedFieldConfig;
+}
+
+export interface CalculatedFieldConfig extends AssayResult {
+    method: AggregationMethods;
+}
+
+export enum AggregationMethods {
+    AVERAGE = 'average',
+    MIN = 'min',
+    MAX = 'max'
 }
 
 export enum Plottables {

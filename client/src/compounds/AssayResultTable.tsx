@@ -23,7 +23,7 @@ export default ({ assay_results }: AssayResultTableProps) => {
                 <TableBody>
                     {
                         assay_results.map(assay_result => (
-                            <TableRow>
+                            <TableRow key={assay_result.result_id}>
                                 <TableCell>{assay_result.result_id}</TableCell>
                                 <TableCell>{assay_result.target}</TableCell>
                                 <TableCell>{assay_result.result}</TableCell>
