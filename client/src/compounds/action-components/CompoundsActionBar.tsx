@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles, AppBar, Toolbar } from "@material-ui/core";
-import { teal } from "@material-ui/core/colors";
 import ChartsAction from './ChartsAction';
 import CalculatedFieldsAction from './CalculatedFieldsAction';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
         backgroundColor: theme.palette.primary.light,
-        boxShadow: 'none'
+        boxShadow: 'none',
+        zIndex: 1
     }
 }));
 

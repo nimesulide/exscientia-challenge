@@ -57,6 +57,10 @@ const theme = createTheme({
         MuiToolbar: {
             variant: 'dense',
         },
+        MuiPaper: {
+            square: true,
+            variant: 'outlined'
+        }
     }
 });
 
