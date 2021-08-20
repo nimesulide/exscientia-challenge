@@ -1,6 +1,7 @@
 import React from 'react';
 import { interpolateTurbo, scaleOrdinal, scaleSequential, schemeCategory10 } from 'd3';
-import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter, Cell, Legend, Line } from 'recharts';
+import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Tooltip, Scatter, Cell } from 'recharts';
+import { Card, CardContent } from '@material-ui/core';
 
 export interface ScatterplotConfig {
     x: string,
@@ -27,23 +28,42 @@ const getColorScale = (data: Array<any>, config: ScatterplotConfig) => {
     return scaleSequential(interpolateTurbo).domain(domain);
 };
 
+const CustomTooltip = ({ active, payload, config }: any) => {
+    if (active && payload && payload.length) {
+        return (
+            <Card>
+                <CardContent>
+                    <p>{`${payload[0].name} : ${payload[0].value}`}</p>
+                    <p>{`${payload[1].name} : ${payload[1].value}`}</p>
+                    {
+                        config.color &&
+                        <p>{`${config.color} : ${payload[0].payload[config.color]}`}</p>
+                    }
+                </CardContent>
+            </Card>
+        );
+    }
+
+    return null;
+};
+
 export default ({ data, config }: ScatterplotProps) => {
     const colors = getColorScale(data, config);
     return (
-        <ResponsiveContainer width='100%' height='100%'>
+        <ResponsiveContainer width={'100%'} height={'100%'}>
             <ScatterChart
                 margin={{
-                    top: 10,
-                    right: 30,
-                    bottom: 30,
-                    left: 10,
+                    top: 40,
+                    right: 40,
+                    bottom: 20,
+                    left: 20,
                 }}
             >
                 <CartesianGrid />
-                <XAxis type='number' dataKey={config.x} name={config.x} />
-                <YAxis type='number' dataKey={config.y} name={config.x} />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={data} fill='#8884d8'>
+                <XAxis type={'number'} label={{ value: config.x, position: 'insideBottom' }} dataKey={config.x} name={config.x} />
+                <YAxis type={'number'} label={{ value: config.y, angle: -90, position: 'insideLeft' }} dataKey={config.y} name={config.y} />
+                <Tooltip content={<CustomTooltip config={config} />} cursor={{ strokeDasharray: '3 3' }} />
+                <Scatter data={data} fill={'#8884d8'}>
                     {config.color ? data.map((entry, index) => {
                         return (
                             <Cell key={`cell-${index}`} fill={colors(entry[config.color ?? ''])} />

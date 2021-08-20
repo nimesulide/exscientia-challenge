@@ -4,7 +4,6 @@ import { view } from '@risingstack/react-easy-state';
 import CompoundsList from './CompoundsList';
 import CompoundsStore from './store/CompoundsStore';
 import CompoundDetails from './CompoundDetails';
-import CompoundsActionBar from './action-components/CompoundsActionBar';
 import Scatterplot from '../charts/Scatterplot';
 import ChartContainer from './ChartContainer';
 

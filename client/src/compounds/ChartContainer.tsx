@@ -6,7 +6,13 @@ import CompoundsStore from './store/CompoundsStore';
 const useStyles = makeStyles((theme) => ({
     root: {
         height: 500,
-        textAlign: 'right'
+        position: 'relative'
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        zIndex: 1
     }
 }));
 
@@ -15,7 +21,7 @@ const ChartContainer: React.FC<{}> = ({ children }) => {
 
     return (
         <Paper className={classes.root}>
-            <IconButton onClick={() => CompoundsStore.setChartConfig()}>
+            <IconButton className={classes.closeButton} onClick={() => CompoundsStore.setChartConfig()}>
                 <CloseIcon />
             </IconButton>
             {children}
