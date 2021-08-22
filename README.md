@@ -39,3 +39,4 @@ http://localhost:3000/
 * Ability to visualize calculated properties on chart for deeper understanding.
 * Workflow endpoint to export or save the current dataset with calculated columns and/or selected interesting compounds.
 * Improve organization of component files within compounds.
+* Optimize storage and pairing of calculated fields.
